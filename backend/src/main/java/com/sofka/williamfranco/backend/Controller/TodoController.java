@@ -1,41 +1,57 @@
 package com.sofka.williamfranco.backend.Controller;
 
-import com.sofka.williamfranco.backend.Model.Todo;
+import com.sofka.williamfranco.backend.Model.ListTodoModelPlain;
+import com.sofka.williamfranco.backend.Model.TodoModelPlain;
 import com.sofka.williamfranco.backend.Service.TodoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
 public class TodoController {
-    @Autowired
+
     private TodoService todoService;
 
-    @GetMapping(value = "api/todos")
-    public Iterable<Todo> list(){
-        return todoService.list();
+    @Autowired
+    public TodoController (TodoService todoService){
+        this.todoService = todoService;
     }
 
-    @PostMapping(value = "api/todo")
-    public Todo save(@RequestBody Todo todo){
-        return todoService.save(todo);
+    @GetMapping(value = "api/list")
+    public Iterable<ListTodoModelPlain> listTodos(){
+        return todoService.listTodos();
     }
 
-    @PutMapping(value = "api/todo")
-    public Todo update(@RequestBody Todo todo){
+    @GetMapping(value = "api/{idlist}/todos")
+    public Iterable<TodoModelPlain> listTodosByList(@PathVariable("idlist") Long idList){
+        return todoService.listTodosByList(idList);
+    }
+
+    @PostMapping(value = "api/todolist")
+    public ListTodoModelPlain newListTodos(@RequestBody ListTodoModelPlain todoList){
+        return todoService.newListTodos(todoList);
+    }
+
+    @PostMapping(value = "/api/{idlist}/todo")
+    public TodoModelPlain newTodoByList(@PathVariable("idlist") Long idlist, @RequestBody TodoModelPlain todoModelPlain){
+        return todoService.newTodoByList(idlist, todoModelPlain);
+    }
+
+    @PutMapping(value = "api/{idlist}/todo")
+    public TodoModelPlain updateTodo(@PathVariable("idlist") Long idlist, @RequestBody TodoModelPlain todo){
         if(todo.getId() != null){
-            return todoService.save(todo);
+            return todoService.updateListTodo(idlist, todo);
         }
         throw new RuntimeException("No existe el id para actualziar");
     }
 
     @DeleteMapping(value = "api/{id}/todo")
-    public void delete(@PathVariable("id")Long id){
-        todoService.delete(id);
+    public void deleteTodoByList(@PathVariable("id")Long id){
+        todoService.deleteTodoByList(id);
     }
 
-    @GetMapping(value = "api/{id}/todo")
-    public Todo get(@PathVariable("id") Long id){
-        return todoService.get(id);
+    @DeleteMapping(value = "api/{idlist}/todolist")
+    public void deleteList(@PathVariable("idlist")Long idlist){
+        todoService.deleteList(idlist);
     }
 
 }
