@@ -9,7 +9,7 @@ const List = () => {
     const currentList = todo.list;
 
     useEffect(() => {
-        fetch(HOST_API + "/todos")
+        fetch(HOST_API + "/list")
             .then(response => response.json())
             .then((list) => {
                 dispatch({ type: "update-list", list })
@@ -18,7 +18,7 @@ const List = () => {
 
 
     const onDelete = (id) => {
-        fetch(HOST_API + "/" + id + "/todo", {
+        fetch(HOST_API + "/" + id + "/todolist", {
             method: "DELETE"
         }).then((list) => {
             dispatch({ type: "delete-item", id })
@@ -75,7 +75,7 @@ const List = () => {
                             <td>{todo.completed ? "Task completed" : "Task pending"}</td>
                             <td><button className='btn btn-danger' onClick={() => onDelete(todo.id)}>Delete</button></td>
                             <td><button className='btn btn-secondary' onClick={() => onEdit(todo)}>Edit</button></td>
-                            <td><button className='btn btn-success' onClick={(event) => onChangeState(event, todo)}>Complete</button></td>
+                            <td><button className='btn btn-success' onClick={(event) => onChangeState(event, todo)}>Complete</button></td> 
                         </tr>
                     })}
                 </tbody>

@@ -9,7 +9,6 @@ public class Todo {
     private Long id;
     private String name;
     private boolean completed;
-
     public Long getId() {
         return id;
     }

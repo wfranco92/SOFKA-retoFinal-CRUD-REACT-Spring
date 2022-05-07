@@ -10,7 +10,6 @@ public class ListTodo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "todo_id")
     private Set<Todo> todo;
@@ -34,7 +33,6 @@ public class ListTodo {
     public Set<Todo> getTodo() {
         return todo;
     }
-
     public void setTodo(Set<Todo> todo) {
         this.todo = todo;
     }
