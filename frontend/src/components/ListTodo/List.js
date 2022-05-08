@@ -36,11 +36,10 @@ const List = () => {
         <div>
             {!isLoaded && <div>loading ...</div>}
             {list.elements.map((element) => {
-                return <div key={element.id} id={"list-to-do" + element.id}>
+                return <div key={element.id} id={"list-to-do" + element.id} className="borderDiv">
                     <fieldset>
                         <legend>
-                            <span>{element.name}</span>
-                            <button onClick={() => onDelete(element.id)}>Delete</button>
+                            <h3> {element.name} <button className='btn btn-outline-danger' onClick={() => onDelete(element.id)}>Delete</button></h3>
                         </legend>
 
                     </fieldset>

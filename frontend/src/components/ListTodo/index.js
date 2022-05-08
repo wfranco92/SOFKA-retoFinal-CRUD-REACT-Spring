@@ -31,17 +31,20 @@ const Form = () => {
     }
 
     return (
-        <form ref={formRef}>
-            <input
-                className='form-control'
-                type="text"
-                name="name"
-                placeholder="What do you think to do today?"
-                onChange={(event) => {
-                    setState({ name: event.target.value })
-                }}  ></input>
-            {<button className='btn btn-primary mt-3 mb-3' onClick={onAddNewListTodo}>Add New List To Do's</button>}
-        </form>
+        <div className='container'>
+            <form ref={formRef}>
+                <input
+                    className='form-control'
+                    type="text"
+                    name="name"
+                    placeholder="What do you think to do today?"
+                    onChange={(event) => {
+                        setState({ name: event.target.value })
+                    }}  ></input>
+                {<button className='btn btn-primary mt-3 mb-3' onClick={onAddNewListTodo}>Add New List To Do's</button>}
+            </form>
+        </div>
+
     );
 }
 export default Form;

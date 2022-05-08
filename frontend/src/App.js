@@ -6,9 +6,11 @@ import { StoreProvider } from './components/TodoContext';
 
 function App() {
   return <StoreProvider>
-    <h3>DashBoard</h3>
-    <Form></Form>
-    <List></List>
+    <h3 className='tittle'>DashBoard</h3>
+    <div className='container'>
+      <Form></Form>
+      <List></List>
+    </div>
   </StoreProvider>
 }
 export default App;

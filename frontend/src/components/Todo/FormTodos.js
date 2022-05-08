@@ -54,18 +54,18 @@ const FormTodos = ({ listId, todo }) => {
 
     return (
 
-            <form ref={formRef}>
-                <h6>lista to Do's {listId}</h6>
+            <form ref={formRef} id={listId}>
                 <input
                     type="text"
                     name="name"
                     placeholder="What is your task?"
                     defaultValue={item.name}
+                    className='form-control mb-3'
                     onChange={(event) => {
                         setState({ ...state, name: event.target.value })
                     }}  ></input>
-                {item.id && <button onClick={onEdit}>Update Task</button>}
-                {!item.id && <button onClick={onAddNewTodo}>Create Task</button>}
+                {item.id && <button className='btn btn-primary' onClick={onEdit}>Update Task</button>}
+                {!item.id && <button className='btn btn-primary' onClick={onAddNewTodo}>Create Task</button>}
             </form>
 
     );

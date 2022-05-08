@@ -5,26 +5,26 @@ import consumer from './consumer';
 
 
 const Todos = ({ listId, todo }) => {
-    //const [lista, setLista] = useState({});
 
-    //console.log(listId);
     const { dispatch } = useContext(Store);
     const [isLoaded, setLoaded] = useState(false);
-    const list = todo.elements.filter((element) => {
-       // console.log(element);
-        return element.listId === listId;
+
+    console.log(todo.elements);
+
+    const list = todo.elements.filter(element => {
+        return element.listid === listId;
     });
 
+
     useEffect(() => {
-        // console.log(listId);
         consumer.findAllTodoBylist(listId)
             .then(response => {
+                console.log(response);
                 if (response.ok) {
                     response.json()
                         .then((items) => {
                             console.log("succesfull todo");
-                            //console.log(items);
-                            //setLista(items);
+                            console.log(items);
                             setLoaded(true);
                             dispatch(events.finded(listId, items));
                         })
@@ -85,16 +85,15 @@ const Todos = ({ listId, todo }) => {
                 </thead>
                 <tbody>
                     {console.log(todo.elements)}
+                    {console.log("lista de elementos")}
                     {console.log(list)}
-                    {todo.elements.map((todo) => {
+                    {list.map((todo) => {
                         return <tr key={todo.id} style={todo.completed ? decorationDone : decorationToDo} id={todo.id}>
                             <td>{todo.id}</td>
                             <td>{todo.name}</td>
-                            {/* <td>{todos.completed ? "Task completed" : "Task pending"}</td> */}
                             <td><input type="checkbox" defaultChecked={todo.completed} onChange={(event) => onChangeState(event, todo)} /></td>
-                            <td><button onClick={() => onDelete(todo.id)}>Delete</button></td>
-                            <td><button disabled={todo.completed} onClick={() => onEdit(todo)}>Edit</button></td>
-                            {/* <td><button className='btn btn-success' onClick={(event) => onChangeState(event, todos)}>Complete</button></td> */}
+                            <td><button className='btn btn-danger' onClick={() => onDelete(todo.id)}>Delete</button></td>
+                            <td><button className='btn btn-secondary' disabled={todo.completed} onClick={() => onEdit(todo)}>Edit</button></td>
                         </tr>
                     })}
                 </tbody>

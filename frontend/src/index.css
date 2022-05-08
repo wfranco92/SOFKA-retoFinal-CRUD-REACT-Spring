@@ -15,3 +15,12 @@ code {
 .listTodos{
   border: 2px solid gray;
 }
+.tittle{
+  text-align: center;
+}
+
+.borderDiv{
+  border: 2px solid gainsboro;
+  margin-bottom: 20px;
+  padding: 15px;
+}
