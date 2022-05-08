@@ -1,5 +1,5 @@
 # SOFKA-retoFinal-CRUD-REACT-Spring
 
-Link viodeo explicacion
+Link video explicacion de la aplicacion
 
 https://youtu.be/0NPlV0ihnOk
