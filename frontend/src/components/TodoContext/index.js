@@ -1,48 +1,27 @@
 import React, { createContext, useReducer } from 'react'
+import reducerTodo from '../ListTodo/reducer';
+import reducerListTodo from '../Todo/reducer';
 
 const initialState = {
-    todo: { list: [], item: {} }
+
+    list: {
+        elements: []
+    },
+    todo: {
+        elements: [],
+        item: {}
+    },
+    mensage: {}
 };
 const Store = createContext(initialState)
 
+const merge = { ...reducerTodo(), ...reducerListTodo() };
 function reducer(state, action) {
-    switch (action.type) {
-        case 'update-item':
-            const todoUpItem = state.todo;
-            const listUpdateEdit = todoUpItem.list.map((item) => {
-                if (item.id === action.item.id) {
-                    return action.item;
-                }
-                return item;
-            });
-            todoUpItem.list = listUpdateEdit;
-            todoUpItem.item = {};
-            return { ...state, todo: todoUpItem }
-        case 'delete-item':
-            const todoUpDelete = state.todo;
-            const listUpdate = todoUpDelete.list.filter((item) => {
-                return item.id !== action.id;
-            });
-            todoUpDelete.list = listUpdate;
-            return { ...state, todo: todoUpDelete }
-        case 'update-list':
-            const todoUpList = state.todo;
-            todoUpList.list = action.list;
-            return { ...state, todo: todoUpList }
-        case 'edit-item':
-            const todoUpEdit = state.todo;
-            todoUpEdit.item = action.item;
-            return { ...state, todo: todoUpEdit }
-        case 'add-item':
-            const todoUp = state.todo.list;
-            todoUp.push(action.item);
-            return { ...state, todo: { list: todoUp, item: {} } }
-        default:
-            return state;
-    }
+    console.log("Dispatch", action.type)
+    return merge[action.type] ? merge[action.type](state, action) : state;
 }
 
-const StoreProvider = (props) => {
+export const StoreProvider = ({ children }) => {
 
     const [state, dispatch] = useReducer(reducer, initialState);
 
@@ -50,11 +29,10 @@ const StoreProvider = (props) => {
         <Store.Provider value={{
             state,
             dispatch,
-            initialState,
         }}>
-            {props.children}
+            {children}
         </Store.Provider>
     );
 }
 
-export { StoreProvider, Store };
+export { Store };

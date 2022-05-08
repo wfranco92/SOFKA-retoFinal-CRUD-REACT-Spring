@@ -1,14 +1,14 @@
 import React from 'react';
-import Form from './components/Form';
-import {ListTodo} from './components/Form/ListTodo'
+import Form from './components/ListTodo';
+import List from './components/ListTodo/List'
+import { StoreProvider } from './components/TodoContext';
+
 
 function App() {
-  return <div className='container mt-5'>
+  return <StoreProvider>
     <h3>DashBoard</h3>
-    <Form>
-      <ListTodo>
-      </ListTodo>
-    </Form>
-  </div>
+    <Form></Form>
+    <List></List>
+  </StoreProvider>
 }
 export default App;
